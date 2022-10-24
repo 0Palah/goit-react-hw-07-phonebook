@@ -2,19 +2,27 @@ import React from 'react';
 import css from './ContactsList.module.css';
 import { deleteContactAction } from 'redux/constants/slice.contacts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 // Видаляємо зі Стейту по ID
 
 const ContactsList = () => {
-  const { contacts } = useSelector(state => state.contacts);
+  const { items, isLoading, error } = useSelector(
+    state => state.contacts.items
+  );
   const { filter } = useSelector(state => state.filter);
   const dispatch = useDispatch();
 
-  const handleDeleteUser = userId => dispatch(deleteContactAction(userId));
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  // const handleDeleteUser = userId => dispatch(deleteContactAction(userId));
 
   // Фільтруємо за наявністю підрядка з Фільтру в іменах Контактів
   const applyFilters = () => {
-    return contacts.filter(({ name }) => {
+    return items.filter(({ name }) => {
       if (filter && !name.toLowerCase().includes(filter.toLowerCase()))
         return false;
       return true;
