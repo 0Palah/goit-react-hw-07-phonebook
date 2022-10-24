@@ -1,9 +1,9 @@
 import React from 'react';
 import css from './ContactsList.module.css';
-import { deleteContactAction } from 'redux/constants/slice.contacts';
+// import { deleteContactAction } from 'redux/constants/slice.contacts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { deleteContact, fetchContacts } from 'redux/operations';
 
 // Видаляємо зі Стейту по ID
 
@@ -16,7 +16,7 @@ const ContactsList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  // const handleDeleteUser = userId => dispatch(deleteContactAction(userId));
+  const handleDeleteUser = userId => dispatch(deleteContact(userId));
 
   // Фільтруємо за наявністю підрядка з Фільтру в іменах Контактів
   // const applyFilters = () => {
@@ -37,7 +37,7 @@ const ContactsList = () => {
             <button
               type="button"
               className={css.button}
-              // onClick={() => handleDeleteUser(el.id)}
+              onClick={() => handleDeleteUser(el.id)}
             >
               Delete
             </button>
