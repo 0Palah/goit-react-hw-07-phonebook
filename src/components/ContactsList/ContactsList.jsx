@@ -29,6 +29,20 @@ const ContactsList = () => {
 
   return (
     <ul className={css.contListWrapper}>
+      {isLoading && !error && <b>Request in progress...</b>}
+      {items?.length > 0 &&
+        items.map(el => (
+          <li key={el.id}>
+            {el.name}: {el.number}
+            <button
+              type="button"
+              className={css.button}
+              // onClick={() => handleDeleteUser(el.id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
       {/* {applyFilters().map(el => (
         <li key={el.id}>
           {el.name}: {el.number}

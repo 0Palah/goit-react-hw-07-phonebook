@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { contactsInitialState } from './initiale-state.contacts';
 import { nanoid } from 'nanoid';
+import { fetchContacts } from 'redux/operations';
 
 // export const addContactAction = createAction(
 //   'contacts/addContactAction',
@@ -15,31 +16,42 @@ import { nanoid } from 'nanoid';
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: contactsInitialState,
-  reducers: {
-    //   deleteContactAction: (state, action) => {
-    //     state.contacts = state.contacts.filter(
-    //       user => user.id !== action.payload
-    //     );
-    //   },
-    // },
-    // extraReducers: {
-    //   [addContactAction]: (state, action) => {
-    //     state.contacts.unshift(action.payload);
-    //   },
 
-    // Виконається в момент старту HTTP-запиту
-    fetchingInProgress(state) {
+  //   deleteContactAction: (state, action) => {
+  //     state.contacts = state.contacts.filter(
+  //       user => user.id !== action.payload
+  //     );
+  //   },
+  // },
+  // extraReducers: {
+  //   [addContactAction]: (state, action) => {
+  //     state.contacts.unshift(action.payload);
+  //   },
+  // // Виконається в момент старту HTTP-запиту
+  // fetchingInProgress(state) {
+  //
+  // },
+  // // Виконається якщо HTTP-запит завершився успішно
+  // fetchingSuccess(state, action) {
+  //   state.isLoading = false;
+  //   state.error = null;
+  //   state.items = action.payload;
+  // },
+  // // Виконається якщо HTTP-запит завершився з помилкою
+  // fetchingError(state, action) {
+  //   state.isLoading = false;
+  //   state.error = action.payload;
+  // },
+  extraReducers: {
+    [fetchContacts.pending](state) {
       state.isLoading = true;
     },
-
-    // Виконається якщо HTTP-запит завершився успішно
-    fetchingSuccess(state, action) {
+    [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.items = action.payload;
     },
-    // Виконається якщо HTTP-запит завершився з помилкою
-    fetchingError(state, action) {
+    [fetchContacts.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -48,5 +60,5 @@ const contactsSlice = createSlice({
 
 export const contactsReducer = contactsSlice.reducer;
 // export const { deleteContactAction } = contactsSlice.actions;
-export const { fetchingInProgress, fetchingSuccess, fetchingError } =
-  contactsSlice.actions;
+// export const { fetchingInProgress, fetchingSuccess, fetchingError } =
+//   contactsSlice.actions;

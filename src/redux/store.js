@@ -3,7 +3,7 @@ import { initialState } from './initial-state';
 import { rootReducer } from './reducer';
 import {
   persistStore,
-  persistReducer,
+  // persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -14,20 +14,20 @@ import {
 import storage from 'redux-persist/lib/storage';
 // import persistReducer from 'redux-persist/es/persistReducer';
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  whitelist: ['contacts'],
-};
+// const persistConfig = {
+//   key: 'contacts',
+//   storage,
+//   whitelist: ['contacts'],
+// };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // const persistedStore = configureStore({
 //   reducer: persistedReducer,
 // });
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   initialState,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
