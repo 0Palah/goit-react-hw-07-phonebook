@@ -11,7 +11,7 @@ export const fetchContacts = () => async dispatch => {
     dispatch(fetchingInProgress());
 
     const response = await axios.get('/contacts');
-    console.log(response.data);
+    console.log(response);
     dispatch(fetchingSuccess(response.data));
   } catch (e) {
     dispatch(fetchingError(e));

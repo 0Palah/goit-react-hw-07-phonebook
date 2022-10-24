@@ -21,19 +21,19 @@ const ContactForm = () => {
   };
 
   // Перевіряємо на унікальність, якщо true додаємо ID і записуємо в Стейт
-  const handleAddContact = ({ name, number }) => {
-    const namesArr = contacts.map(el => el.name.toLocaleLowerCase());
+  // const handleAddContact = ({ name, number }) => {
+  //   const namesArr = contacts.map(el => el.name.toLocaleLowerCase());
 
-    if (!namesArr.includes(name.toLocaleLowerCase())) {
-      dispatch(addContactAction({ name, number }));
-    } else {
-      alert(`${name} is already in contact.`);
-    }
-  };
+  //   if (!namesArr.includes(name.toLocaleLowerCase())) {
+  //     dispatch(addContactAction({ name, number }));
+  //   } else {
+  //     alert(`${name} is already in contact.`);
+  //   }
+  // };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    handleAddContact({ name, number });
+    // handleAddContact({ name, number });
 
     setName('');
     setNumber('');
