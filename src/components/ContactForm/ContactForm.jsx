@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContactAction } from 'redux/constants/slice.contacts';
+import { addContact } from 'redux/operations';
+import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -12,7 +14,8 @@ const ContactForm = () => {
     number: setNumber,
   };
 
-  const { contacts } = useSelector(state => state.contacts);
+  const { items } = useSelector(state => state.contacts);
+  console.log(items);
   const dispatch = useDispatch();
 
   const handleChange = evt => {
@@ -33,10 +36,29 @@ const ContactForm = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    // handleAddContact({ name, number });
+    const newContactName = evt.target.inputName.value;
+    const newContactNumber = evt.target.inputTel.value;
+
+    const newContactOgj = {
+      name: newContactName,
+      number: newContactNumber,
+    };
+    verifyContact(newContactOgj);
 
     setName('');
     setNumber('');
+  };
+
+  const verifyContact = newContactOgj => {
+    console.log(newContactOgj);
+    const newName = newContactOgj.name;
+    const namesArr = items.map(el => el.name.toLocaleLowerCase());
+    console.log(namesArr);
+    if (!namesArr.includes(newName.toLocaleLowerCase())) {
+      dispatch(addContact(newContactOgj));
+    } else {
+      alert(`${newName} is already in contact.`);
+    }
   };
 
   return (
