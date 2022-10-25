@@ -1,52 +1,41 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactAction } from 'redux/constants/slice.contacts';
+// import { addContactAction } from 'redux/constants/slice.contacts';
 import { addContact } from 'redux/operations';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
+  const { items } = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const stateMap = {
-    name: setName,
-    number: setNumber,
-  };
+  // const stateMap = {
+  //   name: setName,
+  //   number: setNumber,
+  // };
 
-  const { items } = useSelector(state => state.contacts);
-  console.log(items);
-  const dispatch = useDispatch();
-
-  const handleChange = evt => {
-    const { name, value } = evt.target;
-    stateMap[name](value);
-  };
-
-  // Перевіряємо на унікальність, якщо true додаємо ID і записуємо в Стейт
-  // const handleAddContact = ({ name, number }) => {
-  //   const namesArr = contacts.map(el => el.name.toLocaleLowerCase());
-
-  //   if (!namesArr.includes(name.toLocaleLowerCase())) {
-  //     dispatch(addContactAction({ name, number }));
-  //   } else {
-  //     alert(`${name} is already in contact.`);
-  //   }
+  // const handleChange = evt => {
+  //   const { name, value } = evt.target;
+  //   stateMap[name](value);
   // };
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    const form = evt.target;
     const newContactName = evt.target.inputName.value;
     const newContactNumber = evt.target.inputTel.value;
 
     const newContactOgj = {
       name: newContactName,
-      number: newContactNumber,
+      phone: newContactNumber,
     };
     verifyContact(newContactOgj);
-
-    setName('');
-    setNumber('');
+    form.reset();
+    // setName('');
+    // setNumber('');
   };
 
   const verifyContact = newContactOgj => {
@@ -73,8 +62,8 @@ const ContactForm = () => {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={name}
-            onChange={handleChange}
+            // value={name}
+            // onChange={handleChange}
           />
         </div>
         <div>
@@ -86,8 +75,8 @@ const ContactForm = () => {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={number}
-            onChange={handleChange}
+            // value={number}
+            // onChange={handleChange}
           />
         </div>
 

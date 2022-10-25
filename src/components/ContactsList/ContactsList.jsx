@@ -33,7 +33,7 @@ const ContactsList = () => {
       {items?.length > 0 &&
         items.map(el => (
           <li key={el.id}>
-            {el.name}: {el.number}
+            {el.name}: {el.phone}
             <button
               type="button"
               className={css.button}
