@@ -1,6 +1,6 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
 import { contactsInitialState } from './initiale-state.contacts';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { addContact, deleteContact, fetchContacts } from 'redux/operations';
 
 // export const addContactAction = createAction(
@@ -62,7 +62,7 @@ const contactsSlice = createSlice({
     [addContact.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
-      state.items = action.payload;
+      state.items.push(action.payload);
     },
     [addContact.rejected](state, action) {
       state.isLoading = false;
