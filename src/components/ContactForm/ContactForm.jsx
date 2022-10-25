@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
+import { selectContactsArr } from 'redux/selectors';
 import css from './ContactForm.module.css';
 
 const ContactForm = () => {
-  const { items } = useSelector(state => state.contacts);
+  const items = useSelector(selectContactsArr);
   const dispatch = useDispatch();
 
   const handleSubmit = evt => {

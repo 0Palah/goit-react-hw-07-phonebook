@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addFilterAction } from 'redux/filter/slice.filter';
+import { selectFiltersStateValue } from 'redux/selectors';
 import css from './Filter.module.css';
 
 const Filter = () => {
-  const { filter } = useSelector(state => state.filter);
+  const filter = useSelector(selectFiltersStateValue);
   const dispatch = useDispatch();
 
   // // Записуємо пошуковий рядок у Стейт
