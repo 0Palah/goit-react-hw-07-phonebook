@@ -1,4 +1,7 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// export const AxiosBaseURL = (axios.defaults.baseURL =
-//   'https://63569ed12712d01e14f89200.mockapi.io');
+const MockAPI = axios.create({
+  baseURL: 'https://63569ed12712d01e14f89200.mockapi.io',
+});
+
+export default MockAPI;
