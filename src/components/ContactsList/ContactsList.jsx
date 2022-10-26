@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { deleteContact, fetchContacts } from 'redux/operations';
+import { deleteContact, fetchContacts } from 'redux/contacts/contactsThunks';
 import { selectContactsState, selectFiltersStateValue } from 'redux/selectors';
 import css from './ContactsList.module.css';
 
@@ -13,10 +13,8 @@ const ContactsList = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  // Видаляємо з DB по ID
   const handleDeleteUser = userId => dispatch(deleteContact(userId));
 
-  // Фільтруємо за наявністю підрядка з Фільтру в іменах Контактів
   const applyFilters = () => {
     return items.filter(({ name }) => {
       if (filter && !name.toLowerCase().includes(filter.toLowerCase()))

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/contactsThunks';
 import { selectContactsArr } from 'redux/selectors';
 import css from './ContactForm.module.css';
 
@@ -10,8 +10,9 @@ const ContactForm = () => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.target;
-    const newContactName = evt.target.inputName.value;
-    const newContactNumber = evt.target.inputTel.value;
+    const { inputName, inputTel } = form;
+    const newContactName = inputName.value;
+    const newContactNumber = inputTel.value;
     const newContactOgj = {
       name: newContactName,
       phone: newContactNumber,

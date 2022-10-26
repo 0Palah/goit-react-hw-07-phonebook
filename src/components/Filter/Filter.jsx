@@ -7,7 +7,6 @@ const Filter = () => {
   const filter = useSelector(selectFiltersStateValue);
   const dispatch = useDispatch();
 
-  // // Записуємо пошуковий рядок у Стейт
   const handleChangeSearch = evt => {
     dispatch(addFilterAction(evt.target.value));
   };
